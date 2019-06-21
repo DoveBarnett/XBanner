@@ -21,7 +21,7 @@
 - 支持设置图片框架整体占位图
 - 支持Glide/Fresco等主流图片加载框架加载图片
 - 支持自定义布局
-
+- 支持AndroidX
 ## 效果图
 
 |模式|效果图
@@ -52,9 +52,15 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
+
+    //普通版本依赖
     implementation 'com.github.xiaohaibin:XBanner:latestVersion'//将latestVersion替换成上面 jitpack 后面的版本号
+    
+    //androidX 版本使用下面的依赖
+    implementation 'com.github.xiaohaibin:XBanner:androidx_v1.0.1'
 }
 ```
+ 
 #### 2.在清单文件中添加网络权限
 
 ```
@@ -226,7 +232,7 @@ mBanner.loadImage(new XBanner.XBannerAdapter() {
 | viewpagerMargin|viewpager页面间距| dimension ，默认为10dp|
 | isClipChildrenModeLessThree|少于三张是否支持一屏多显模式|  boolean类型，默认为false 默认不开启 |
 | bannerBottomMargin|banner轮播区域底部margin，可设置指示器距离轮播图的间距| dimension ，默认为0dp|
-
+| viewPagerClipChildren|设置 viewpager clipChildren 属性，是否显示多个 |boolean类型| 
 ## 混淆配置
 
 ```
@@ -245,6 +251,8 @@ mBanner.loadImage(new XBanner.XBannerAdapter() {
   >1）确认是否实现了 **loadImage（）** 方法，需要使用自己的图片加载框架加载图片！！！
   >2）请把加载图片地址复制到浏览器看看是否打开图片，确认图片地址是否正确！！！
 
+- 4.AndroidX模式配置问题
+https://blog.csdn.net/qq_17766199/article/details/81433706
 
 ## 关于我
 

@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mBanner = (XBanner) findViewById(R.id.banner);
+        mBanner = findViewById(R.id.banner);
         mBanner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ScreenUtil.getScreenWidth(this) / 2));
-        ListView listView = (ListView) findViewById(R.id.lv);
+        ListView listView = findViewById(R.id.lv);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.pages));
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
                 Glide.with(MainActivity.this).load(url).placeholder(R.drawable.default_image).error(R.drawable.default_image).into((ImageView) view);
             }
         });
+        List<TuchongEntity.FeedListBean.EntryBean> data = new ArrayList<>();
+        mBanner.setBannerData(data);
     }
 
     /**
@@ -109,15 +111,15 @@ public class MainActivity extends AppCompatActivity {
                         TuchongEntity advertiseEntity = new Gson().fromJson(response, TuchongEntity.class);
                         List<TuchongEntity.FeedListBean> others = advertiseEntity.getFeedList();
                         List<TuchongEntity.FeedListBean.EntryBean> data = new ArrayList<>();
-                        for (int i = 0; i < others.size(); i++) {
+                        for (int i = 0; i <others.size(); i++) {
                             TuchongEntity.FeedListBean feedListBean = others.get(i);
                             if ("post".equals(feedListBean.getType())) {
                                 data.add(feedListBean.getEntry());
                             }
                         }
-                        mBanner.setBannerData(data);
                         //刷新数据之后，需要重新设置是否支持自动轮播
                         mBanner.setAutoPlayAble(data.size() > 1);
+                        mBanner.setBannerData(data);
                     }
                 });
     }
